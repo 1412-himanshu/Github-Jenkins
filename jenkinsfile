@@ -33,14 +33,14 @@ pipeline {
     post {
         // Send email notification at the end of test and security scan stages
         success {
-            emailext body: 'The Github + Jenkins Pipeline run was successful.',
-                     subject: 'Pipeline Success Notification',
-                     to: 'hatwarhimanshu1412@gmail.com'
+                    mail to: 'hatwarhimanshu1412@gmail.com',
+                    subject: 'Pipeline Success Notification',
+                    body: 'The Github + Jenkins Pipeline run was successful.'          
         }
         failure {
-            emailext body: 'The Github + Jenkins Pipeline run has failed.',
-                     subject: 'Pipeline Failure Notification',
-                     to: 'hatwarhimanshu1412@gmail.com'
+            mail to: 'hatwarhimanshu1412@gmail.com',
+                    subject: 'Pipeline Failure Notification',
+                    body: 'The Github + Jenkins Pipeline run has failed.'
         }
     }
 }
