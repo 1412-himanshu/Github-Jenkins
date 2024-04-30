@@ -51,18 +51,42 @@ pipeline {
     }
 
     post {
-        // Send email notification at the end of test and security scan stages
-        success {
-                    mail to: 'hatwarhimanshu1412@gmail.com',
-                    subject: 'Pipeline Success Notification',
-                    body: 'The Github + Jenkins Pipeline run was successful.',
-                    attachmentsPattern: "**/*.log"  
+    success {
+        script {
+            // Archive the build log as an artifact
+            archiveArtifacts artifacts: 'logs/*.log', allowEmptyArchive: true
         }
-        failure {
-            mail to: 'hatwarhimanshu1412@gmail.com',
-                    subject: 'Pipeline Failure Notification',
-                    body: 'The Github + Jenkins Pipeline run has failed.'
-                    attachmentsPattern: "**/*.log"
-        }
+        emailext subject: "Pipeline Success Notification",
+                  body: "The GitHub + Jenkins Pipeline run was successful.",
+                  to: "hatwarhimanshu1412@gmail.com",
+                  attachmentsPattern: 'logs/*.log'
     }
+    failure {
+        script {
+            // Archive the build log as an artifact
+            archiveArtifacts artifacts: 'logs/*.log', allowEmptyArchive: true
+        }
+        emailext subject: "Pipeline Failure Notification",
+                  body: "The GitHub + Jenkins Pipeline run has failed.",
+                  to: "hatwarhimanshu1412@gmail.com",
+                  attachmentsPattern: 'logs/*.log'
+    }
+}
+
+
+    // post {
+    //     // Send email notification at the end of test and security scan stages
+    //     success {
+    //                 mail to: 'hatwarhimanshu1412@gmail.com',
+    //                 subject: 'Pipeline Success Notification',
+    //                 body: 'The Github + Jenkins Pipeline run was successful.',
+    //                 attachmentsPattern: "**/*.log"  
+    //     }
+    //     failure {
+    //         mail to: 'hatwarhimanshu1412@gmail.com',
+    //                 subject: 'Pipeline Failure Notification',
+    //                 body: 'The Github + Jenkins Pipeline run has failed.'
+    //                 attachmentsPattern: "**/*.log"
+    //     }
+    // }
 }
