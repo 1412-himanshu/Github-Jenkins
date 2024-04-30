@@ -56,13 +56,13 @@ pipeline {
                     mail to: 'hatwarhimanshu1412@gmail.com',
                     subject: 'Pipeline Success Notification',
                     body: 'The Github + Jenkins Pipeline run was successful.',
-                    attachLog: true      
+                    attachmentsPattern: "**/*.log"  
         }
         failure {
             mail to: 'hatwarhimanshu1412@gmail.com',
                     subject: 'Pipeline Failure Notification',
                     body: 'The Github + Jenkins Pipeline run has failed.'
-                    attachLog: true
+                    attachmentsPattern: "**/*.log"
         }
     }
 }
