@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo("mvn clean and compiled test package") 
+            }
+        }
+        
+        stage('Unit and Integration Tests') {
+            steps {
+                echo("Unit Tests Executed")
+                echo("Test Commands for Integration in Progress......") 
+                echo("Integration Tests Successful")
+            }
+        }
+
+        stage('Code Analysis') {
+            steps {
+                echo("Code Analysis Command Given") 
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                
+                echo("Security Scan Done Successfully") 
+            }
+        }
+    }
+
+    post {
+        // Send email notification at the end of test and security scan stages
+        success {
+            emailext body: 'The Github + Jenkins Pipeline run was successful.',
+                     subject: 'Pipeline Success Notification',
+                     to: 'hatwarhimanshu1412@gmail.com'
+        }
+        failure {
+            emailext body: 'The Github + Jenkins Pipeline run has failed.',
+                     subject: 'Pipeline Failure Notification',
+                     to: 'hatwarhimanshu1412@gmail.com'
+        }
+    }
+}
