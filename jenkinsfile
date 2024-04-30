@@ -28,6 +28,26 @@ pipeline {
                 echo("Security Scan Done Successfully") 
             }
         }
+        stage('Deploy to Staging') {
+            steps {
+
+                echo("Deployed and Staged successfully ") 
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                
+                echo("Integration Tests Command Given")
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+
+                echo("Deploy to Production Command Given")
+            }
+        }
     }
 
     post {
@@ -35,12 +55,14 @@ pipeline {
         success {
                     mail to: 'hatwarhimanshu1412@gmail.com',
                     subject: 'Pipeline Success Notification',
-                    body: 'The Github + Jenkins Pipeline run was successful.'          
+                    body: 'The Github + Jenkins Pipeline run was successful.',
+                    attachLog: true      
         }
         failure {
             mail to: 'hatwarhimanshu1412@gmail.com',
                     subject: 'Pipeline Failure Notification',
                     body: 'The Github + Jenkins Pipeline run has failed.'
+                    attachLog: true
         }
     }
 }
