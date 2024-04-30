@@ -56,9 +56,9 @@ pipeline {
             // Archive the build log as an artifact
             archiveArtifacts artifacts: 'logs/*.log', allowEmptyArchive: true
         }
-        emailext subject: "Pipeline Success Notification",
+         subject: "Pipeline Success Notification",
                   body: "The GitHub + Jenkins Pipeline run was successful.",
-                  to: "hatwarhimanshu1412@gmail.com",
+                 mail to: "hatwarhimanshu1412@gmail.com",
                   attachmentsPattern: 'logs/*.log'
     }
     failure {
@@ -66,9 +66,9 @@ pipeline {
             // Archive the build log as an artifact
             archiveArtifacts artifacts: 'logs/*.log', allowEmptyArchive: true
         }
-        emailext subject: "Pipeline Failure Notification",
+         subject: "Pipeline Failure Notification",
                   body: "The GitHub + Jenkins Pipeline run has failed.",
-                  to: "hatwarhimanshu1412@gmail.com",
+                  mail to: "hatwarhimanshu1412@gmail.com",
                   attachmentsPattern: 'logs/*.log'
     }
 }
